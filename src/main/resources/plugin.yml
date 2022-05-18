@@ -1,0 +1,11 @@
+name: EdenAuctionEXP
+version: '${project.version}'
+main: fr.edencraft.edenauctionexp.EdenAuctionEXP
+api-version: 1.18
+prefix: EdenAuctionEXP
+authors: [ NayeOne ]
+description: AuctionHouse for EXP
+website: https://github.com/EdenStacks
+depend:
+  - SmartInvs
+  - Vault

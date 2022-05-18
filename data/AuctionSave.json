@@ -1,0 +1,12 @@
+{
+  "orders": [
+    {
+      "id": 1,
+      "uuid": "f3d62635-53ad-4669-aed1-7345f7b51191",
+      "amount": 1000,
+      "price": 100,
+      "orderType": "SELLING",
+      "creationDate": 1650976929
+    }
+  ]
+}
