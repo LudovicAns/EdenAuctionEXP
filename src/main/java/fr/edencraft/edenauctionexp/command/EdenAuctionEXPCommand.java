@@ -64,16 +64,7 @@ public class EdenAuctionEXPCommand extends BaseCommand {
             return;
         }
 
-        // Todo: Ajouter la création de l'ordre directement dans la classe Auction.
-        Order order = new Order(
-                auction.getFreeId(),
-                seller.getUniqueId(),
-                amount,
-                price,
-                OrderType.SELLING,
-                System.currentTimeMillis()
-        );
-        boolean state = auction.addOrder(order);
+        boolean state = auction.addOrder(seller.getUniqueId(), amount, price, OrderType.SELLING);
         if (!state) {
             seller.sendMessage("Impossible de placer votre offre, contactez un administrateur.");
             return;
@@ -81,7 +72,6 @@ public class EdenAuctionEXPCommand extends BaseCommand {
 
         seller.sendMessage("Suppression de " + (int) (amount) + "/" + PlayerUtils.getPlayerExp(seller) + " exp.");
         PlayerUtils.changePlayerExp(seller.getPlayer(), (int) (amount * -1));
-        seller.sendMessage("Ordre ajouté. (" + order.getId() + ").");
     }
 
     @Subcommand("remove")
@@ -148,16 +138,7 @@ public class EdenAuctionEXPCommand extends BaseCommand {
             return;
         }
 
-        // Todo: Ajouter la création de l'ordre directement dans la classe Auction.
-        Order order = new Order(
-                auction.getFreeId(),
-                player.getUniqueId(),
-                amount,
-                price,
-                OrderType.BUYING,
-                System.currentTimeMillis()
-        );
-        boolean state = auction.addOrder(order);
+        boolean state = auction.addOrder(player.getUniqueId(), amount, price, OrderType.BUYING);
         if (!state) {
             player.sendMessage("Impossible de placer votre offre, contactez un administrateur.");
             return;
@@ -165,7 +146,6 @@ public class EdenAuctionEXPCommand extends BaseCommand {
 
         player.sendMessage("Mise en réserve de " + price + " " + economy.currencyNamePlural());
         economy.withdrawPlayer(player, price);
-        player.sendMessage("Ordre ajouté. (" + order.getId() + ").");
     }
 
     @Subcommand("take-order")

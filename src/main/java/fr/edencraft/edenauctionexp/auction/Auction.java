@@ -173,6 +173,23 @@ public class Auction {
         return true;
     }
 
+    /**
+     * @return true in case of success else false.
+     */
+    public boolean addOrder(UUID uuid, double amount, double price, OrderType orderType) {
+        if (!loaded) return false;
+
+        int id = getFreeId();
+        Order order = new Order(id, uuid, amount, price, orderType, System.currentTimeMillis());
+
+        OrderPlaced orderPlaced = new OrderPlaced(false, this, order);
+        Bukkit.getPluginManager().callEvent(orderPlaced);
+        if (orderPlaced.isCancelled()) return false;
+
+        this.orders.add(order);
+        return true;
+    }
+
     public boolean idIsFree(int id) {
         return orders.stream().noneMatch(order -> order.getId() == id);
     }
